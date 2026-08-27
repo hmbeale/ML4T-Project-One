@@ -36,7 +36,8 @@ def author():
     """  		  	   		 		  		  		  		    	 		 		   		 		  
     return "hbeale7"  # replace tb34 with your Georgia Tech username.
   		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
+# study group as well
+
 def gtid():  		  	   		 		  		  		  		    	 		 		   		 		  
     """  		  	   		 		  		  		  		    	 		 		   		 		  
     :return: The GT ID of the student  		  	   		 		  		  		  		    	 		 		   		 		  
@@ -58,30 +59,51 @@ def get_spin_result(win_prob):
     if np.random.random() <= win_prob:  		  	   		 		  		  		  		    	 		 		   		 		  
         result = True  		  	   		 		  		  		  		    	 		 		   		 		  
     return result  		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
+
+
   		  	   		 		  		  		  		    	 		 		   		 		  
 def test_code():  		  	   		 		  		  		  		    	 		 		   		 		  
     """  		  	   		 		  		  		  		    	 		 		   		 		  
     Method to test your code  		  	   		 		  		  		  		    	 		 		   		 		  
     """  		  	   		 		  		  		  		    	 		 		   		 		  
-    win_prob = 0.60  # set appropriately to the probability of a win  		  	   		 		  		  		  		    	 		 		   		 		  
+    win_prob = 0.4737  # set appropriately to the probability of a win
     np.random.seed(gtid())  # do this only once  		  	   		 		  		  		  		    	 		 		   		 		  
-    print(get_spin_result(win_prob))  # test the roulette spin  		  	   		 		  		  		  		    	 		 		   		 		  
-    # add your code here to implement the experiments  		  	   		 		  		  		  		    	 		 		   		 		  
+    # print(get_spin_result(win_prob))  # test the roulette spin
+    # add your code here to implement the experiments
+    # print("es", episode_spin())
+    arr_height = 10
+    empty_arr = np.empty((arr_height, 1000))
+    spin_record = spin_multiple_episodes(10, empty_arr)
+    print(spin_record)
+
+def spin_multiple_episodes(num_spins, big_arr):
+    filled_arr = big_arr.copy()
+    for i in range(num_spins):
+        filled_arr[i] = episode_spin()
+    return filled_arr
+
+def episode_spin():
+    winnings_arr = []
+    episode_winnings = 0
+    attempts = 0
+    while episode_winnings < 80 and attempts < 1000:
+        won = False
+        bet_amount = 1
+        while not won:
+            won = get_spin_result(0.5)
+            winnings_arr.append(episode_winnings)
+            if won:
+                episode_winnings = episode_winnings + bet_amount
+            else:
+                episode_winnings = episode_winnings - bet_amount
+                bet_amount = bet_amount * 2
+            attempts = attempts + 1
+    #fill remaining with highest value
+    while attempts < 1000:
+        winnings_arr.append(episode_winnings)
+        attempts = attempts + 1
+    return winnings_arr
 
 
-# episode_winnings = $0
-# while episode_winnings < $80:
-#     won = False
-#     bet_amount = $1
-#     while not won
-#         wager bet_amount on black
-#         won = result of roulette wheel spin
-#         if won == True:
-#             episode_winnings = episode_winnings + bet_amount
-#         else:
-#             episode_winnings = episode_winnings - bet_amount
-#             bet_amount = bet_amount * 2
-  		  	   		 		  		  		  		    	 		 		   		 		  
 if __name__ == "__main__":  		  	   		 		  		  		  		    	 		 		   		 		  
     test_code()  		  	   		 		  		  		  		    	 		 		   		 		  
