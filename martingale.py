@@ -26,9 +26,13 @@ GT User ID: hbeale7
 GT ID: 904202603		  	   		 		  		  		  		    	 		 		   		 		  
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use("Agg")
 
+import matplotlib.pyplot as plt
+import numpy as np
+
+# DO NOT SUBMIT PLT.SHOW
 
 def author():
     """  		  	   		 		  		  		  		    	 		 		   		 		  
@@ -37,8 +41,16 @@ def author():
     """
     return "hbeale7"  # replace tb34 with your Georgia Tech username.
 
+def study_group():
+    """
+    Returns
+            A comma separated string of GT_Name of each member of your study group
+            # Example: "gburdell3, jdoe77, tbalch7" or "gburdell3" if a single individual working alone
 
-# study group as well
+        Return type
+            str
+    """
+    return "hbeale7"
 
 def gtid():
     """  		  	   		 		  		  		  		    	 		 		   		 		  
@@ -46,7 +58,6 @@ def gtid():
     :rtype: int  		  	   		 		  		  		  		    	 		 		   		 		  
     """
     return 904202603  # replace with your GT ID number
-
 
 def get_spin_result(win_prob):
     """  		  	   		 		  		  		  		    	 		 		   		 		  
@@ -62,131 +73,92 @@ def get_spin_result(win_prob):
         result = True
     return result
 
-
 def test_code():
     """  		  	   		 		  		  		  		    	 		 		   		 		  
     Method to test your code  		  	   		 		  		  		  		    	 		 		   		 		  
     """
-    win_prob = 0.4737  # set appropriately to the probability of a win
-    np.random.seed(gtid())  # do this only once  		  	   		 		  		  		  		    	 		 		   		 		  
-    # print(get_spin_result(win_prob))  # test the roulette spin
     # add your code here to implement the experiments
-    # print("es", episode_spin())
+    np.random.seed(gtid())  # do this only once
+    win_probability = 0.4737  # set appropriately to the probability of a win  		    	 		 		   		 		  
+    experiment1(win_probability)
+    experiment2(win_probability)
 
-    experiment1_1()
-    experiment1_2and1_3()
-    experiment2_4and2_5()
-
-    first_bankroll_spin = episode_spin_with_bankroll()
-    second_bankroll_spin = episode_spin_with_bankroll()
-
-    # print(first_bankroll_spin)
-    # 2nd spin goes bust
-    # print(second_bankroll_spin)
-
-def experiment1_1():
+def experiment1(win_probability):
     arr_height = 10
     empty_arr = np.empty((10, 1000))
-    spin_record = spin_multiple_episodes(arr_height, empty_arr)
-    # spin_record = spin_multiple_episodes_with_bankroll(arr_height, empty_arr)
+    spin_record = spin_multiple_episodes(arr_height, empty_arr, win_probability)
 
     for i in range(arr_height):
         plt.plot(spin_record[i], label=f"Episode {i + 1}")
-    # print(spin_record)
 
-    plt.xlabel("Spin")
-    plt.ylabel("Value")
     plt.title("10 Roulette Episodes")
 
-    plt.xlim(0, 300)
-    plt.ylim(-256, 100)
+    std_plot()  
 
-    plt.legend()
-    plt.show()
+    plt.savefig("figure_1.png")
+    plt.close()
 
-
-def experiment1_2and1_3():
     arr_height = 1000
     num_spins = 1000
     empty_arr = np.empty((arr_height, 1000))
-    spin_record = spin_multiple_episodes(num_spins, empty_arr)
+    spin_record = spin_multiple_episodes(num_spins, empty_arr, win_probability)
 
     means = np.mean(spin_record, axis=0)
     medians = np.median(spin_record, axis=0)
     stddevs = np.std(spin_record, axis=0)
 
-    # print("sr", spin_record)
-    # print("med", medians)
     plt.figure()
     plt.plot(means, label="Mean")
     plt.plot(means + stddevs, label="Mean + Std Dev")
     plt.plot(means - stddevs, label="Mean - Std Dev")
 
-    plt.xlabel("Spin")
-    plt.ylabel("Value")
-    plt.legend()
+    std_plot()
 
-    plt.xlim(0, 300)
-    plt.ylim(-256, 100)
+    plt.savefig("figure_2.png")
+    plt.close()
 
     plt.figure()
     plt.plot(medians, label="Median")
     plt.plot(medians + stddevs, label="Median + Std Dev")
     plt.plot(medians - stddevs, label="Median - Std Dev")
 
-    plt.xlabel("Spin")
-    plt.ylabel("Value")
-    plt.legend()
+    std_plot()
 
-    plt.xlim(0, 300)
-    plt.ylim(-256, 100)
-
-    plt.show()
-
-    # for i in range(arr_height):
-    #     plt.plot(spin_record[i], label=f"Episode {i + 1}")
-    # print(spin_record)
-
-    # plt.xlabel("Spin")
-    # plt.ylabel("Value")
-    # plt.title("10 Roulette Episodes")
-    #
-    # plt.xlim(0, 300)
-    # plt.ylim(-256, 100)
-    #
-    # plt.legend()
-    # plt.show()
+    plt.savefig("figure_3.png")
+    plt.close()
 
 
-def experiment2_4and2_5():
+def experiment2(win_probability):
     arr_height = 1000
     num_spins = 1000
     empty_arr = np.empty((arr_height, num_spins))
-    spin_record = spin_multiple_episodes_with_bankroll(num_spins, empty_arr)
+    spin_record = spin_multiple_episodes_with_bankroll(num_spins, empty_arr, win_probability)
 
     means = np.mean(spin_record, axis=0)
     medians = np.median(spin_record, axis=0)
     stddevs = np.std(spin_record, axis=0)
 
-    # print("sr", spin_record)
-    # print("med", medians)
     plt.figure()
     plt.plot(means, label="Mean")
     plt.plot(means + stddevs, label="Mean + Std Dev")
     plt.plot(means - stddevs, label="Mean - Std Dev")
 
-    plt.xlabel("Spin")
-    plt.ylabel("Value")
-    plt.legend()
+    std_plot()
 
-    plt.xlim(0, 300)
-    plt.ylim(-256, 100)
+    plt.savefig("figure_4.png")
+    plt.close()
 
     plt.figure()
     plt.plot(medians, label="Median")
     plt.plot(medians + stddevs, label="Median + Std Dev")
     plt.plot(medians - stddevs, label="Median - Std Dev")
 
+    std_plot()
+
+    plt.savefig("figure_5.png")
+    plt.close()
+
+def std_plot():
     plt.xlabel("Spin")
     plt.ylabel("Value")
     plt.legend()
@@ -194,22 +166,19 @@ def experiment2_4and2_5():
     plt.xlim(0, 300)
     plt.ylim(-256, 100)
 
-    plt.show()
-
-
-def spin_multiple_episodes(num_spins, big_arr):
+def spin_multiple_episodes(num_spins, big_arr, win_probability):
     filled_arr = big_arr.copy()
     for i in range(num_spins):
-        filled_arr[i] = episode_spin()
+        filled_arr[i] = episode_spin(win_probability)
     return filled_arr
 
-def spin_multiple_episodes_with_bankroll(num_spins, big_arr):
+def spin_multiple_episodes_with_bankroll(num_spins, big_arr, win_probability):
     filled_arr = big_arr.copy()
     for i in range(num_spins):
-        filled_arr[i] = episode_spin_with_bankroll()
+        filled_arr[i] = episode_spin_with_bankroll(win_probability)
     return filled_arr
 
-def episode_spin():
+def episode_spin(win_probability):
     winnings_arr = []
     episode_winnings = 0
     attempts = 0
@@ -217,7 +186,7 @@ def episode_spin():
         won = False
         bet_amount = 1
         while not won:
-            won = get_spin_result(0.5)
+            won = get_spin_result(win_probability)
             winnings_arr.append(episode_winnings)
             if won:
                 episode_winnings = episode_winnings + bet_amount
@@ -232,7 +201,7 @@ def episode_spin():
     return winnings_arr
 
 
-def episode_spin_with_bankroll():
+def episode_spin_with_bankroll(win_probability):
     winnings_arr = []
     episode_winnings = 0
     attempts = 0
@@ -250,7 +219,7 @@ def episode_spin_with_bankroll():
             # print("bust")
             break
         while not won:
-            won = get_spin_result(0.5)
+            won = get_spin_result(win_probability)
             winnings_arr.append(episode_winnings)
             if won:
                 episode_winnings = episode_winnings + bet_amount
