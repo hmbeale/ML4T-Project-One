@@ -1,4 +1,4 @@
-""""""  		  	   		 		  		  		  		    	 		 		   		 		  
+""""""
 """Assess a betting strategy.  		  	   		 		  		  		  		    	 		 		   		 		  
   		  	   		 		  		  		  		    	 		 		   		 		  
 Copyright 2018, Georgia Institute of Technology (Georgia Tech)  		  	   		 		  		  		  		    	 		 		   		 		  
@@ -21,34 +21,45 @@ GT honor code violation.
   		  	   		 		  		  		  		    	 		 		   		 		  
 -----do not edit anything above this line---  		  	   		 		  		  		  		    	 		 		   		 		  
   		  	   		 		  		  		  		    	 		 		   		 		  
-Student Name: Holden Beale (replace with your name)  		  	   		 		  		  		  		    	 		 		   		 		  
-GT User ID: hbeale7 (replace with your User ID)  		  	   		 		  		  		  		    	 		 		   		 		  
-GT ID: 904202603 (replace with your GT ID)  		  	   		 		  		  		  		    	 		 		   		 		  
-"""  		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
+Student Name: Holden Beale
+GT User ID: hbeale7	  	   		 		  		  		  		    	 		 		   		 		  
+GT ID: 904202603		  	   		 		  		  		  		    	 		 		   		 		  
+"""
+
 import matplotlib
+matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
-import numpy as np  		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
-def author():  		  	   		 		  		  		  		    	 		 		   		 		  
+import numpy as np
+
+# DO NOT SUBMIT PLT.SHOW
+
+def author():
     """  		  	   		 		  		  		  		    	 		 		   		 		  
     :return: The GT username of the student  		  	   		 		  		  		  		    	 		 		   		 		  
     :rtype: str  		  	   		 		  		  		  		    	 		 		   		 		  
-    """  		  	   		 		  		  		  		    	 		 		   		 		  
-    return "hbeale7"    		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
-def gtid():  		  	   		 		  		  		  		    	 		 		   		 		  
+    """
+    return "hbeale7"  # replace tb34 with your Georgia Tech username.
+
+def study_group():
+    """
+    Returns
+            A comma separated string of GT_Name of each member of your study group
+            # Example: "gburdell3, jdoe77, tbalch7" or "gburdell3" if a single individual working alone
+
+        Return type
+            str
+    """
+    return "hbeale7"
+
+def gtid():
     """  		  	   		 		  		  		  		    	 		 		   		 		  
     :return: The GT ID of the student  		  	   		 		  		  		  		    	 		 		   		 		  
     :rtype: int  		  	   		 		  		  		  		    	 		 		   		 		  
-    """  		  	   		 		  		  		  		    	 		 		   		 		  
-    return 904202603    		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
-def get_spin_result(win_prob):  		  	   		 		  		  		  		    	 		 		   		 		  
+    """
+    return 904202603  # replace with your GT ID number
+
+def get_spin_result(win_prob):
     """  		  	   		 		  		  		  		    	 		 		   		 		  
     Given a win probability between 0 and 1, the function returns whether the probability will result in a win.  		  	   		 		  		  		  		    	 		 		   		 		  
   		  	   		 		  		  		  		    	 		 		   		 		  
@@ -56,37 +67,44 @@ def get_spin_result(win_prob):
     :type win_prob: float  		  	   		 		  		  		  		    	 		 		   		 		  
     :return: The result of the spin.  		  	   		 		  		  		  		    	 		 		   		 		  
     :rtype: bool  		  	   		 		  		  		  		    	 		 		   		 		  
-    """  		  	   		 		  		  		  		    	 		 		   		 		  
-    result = False  		  	   		 		  		  		  		    	 		 		   		 		  
-    if np.random.random() <= win_prob:  		  	   		 		  		  		  		    	 		 		   		 		  
-        result = True  		  	   		 		  		  		  		    	 		 		   		 		  
-    return result  		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
-def test_code():  		  	   		 		  		  		  		    	 		 		   		 		  
+    """
+    result = False
+    if np.random.random() <= win_prob:
+        result = True
+    return result
+
+def test_code():
     """  		  	   		 		  		  		  		    	 		 		   		 		  
     Method to test your code  		  	   		 		  		  		  		    	 		 		   		 		  
-    """  		  	   		 		  		  		  		    	 		 		   		 		  
-      		  	   		 		  		  		  		    	 		 		   		 		  
-    np.random.seed(gtid())  	   
+    """
+    # add your code here to implement the experiments
+    np.random.seed(gtid())  # do this only once
+    win_probability = 0.4737  # set appropriately to the probability of a win  		
     episode_size = 1000 # number of spins in an episode
+        	 		 		   		 		  
+    experiment1(win_probability, episode_size)
+    experiment2(win_probability, episode_size)
 
-    experiment1(episode_size)
-    experiment2(episode_size)
-
-
-def experiment1(episode_size):
+def experiment1(win_probability, episode_size):
     num_episodes = 10
-    spin_record = spin_multiple_episodes(num_episodes, episode_size, 0, False)
+
+    empty_arr = np.empty((num_episodes, episode_size))
+    # def spin_multiple_episodes(num_spins, big_arr, win_probability):
+
+    spin_record = spin_multiple_episodes(num_episodes, empty_arr, episode_size, win_probability)
 
     for i in range(num_episodes):
         plt.plot(spin_record[i], label=f"Episode {i + 1}")
 
-    plt.title("fig. 1: 10 Roulette Episodes")
+    plt.title("10 Roulette Episodes")
     std_plot()  
 
     plt.savefig("figure_1.png")
     plt.close()
+
+    arr_height = 1000
+    empty_arr = np.empty((arr_height, num_episodes))
+    spin_record = spin_multiple_episodes(arr_height, empty_arr, episode_size, win_probability)
 
     means = np.mean(spin_record, axis=0)
     medians = np.median(spin_record, axis=0)
@@ -97,7 +115,7 @@ def experiment1(episode_size):
     plt.plot(means + stddevs, label="Mean + Std Dev")
     plt.plot(means - stddevs, label="Mean - Std Dev")
 
-    plt.title("fig. 2: Mean Values for 10 episodes of Roulette")
+    plt.title("Mean Values for ")
     std_plot()
 
     plt.savefig("figure_2.png")
@@ -108,17 +126,24 @@ def experiment1(episode_size):
     plt.plot(medians + stddevs, label="Median + Std Dev")
     plt.plot(medians - stddevs, label="Median - Std Dev")
 
-    plt.title("fig. 3: Median Values for 10 episodes of Roulette")
     std_plot()
 
     plt.savefig("figure_3.png")
     plt.close()
 
-    print_results("experiment 1 results", means, medians, stddevs)
 
-def experiment2(episode_size):
+def experiment2(win_probability, episode_size):
     num_episodes = 1000
-    spin_record = spin_multiple_episodes(num_episodes, episode_size, -256, True)
+    empty_arr = np.empty((num_episodes, episode_size))
+    parameters = {
+        "empty_arr": empty_arr,
+        "num_episodes": num_episodes,
+        "episode_size": episode_size,
+        "win_probability": win_probability,
+        "bankroll_limit": -256,
+        "has_bankroll_limit": True
+    }
+    spin_record = spin_multiple_episodes_with_bankroll(**parameters)
 
     means = np.mean(spin_record, axis=0)
     medians = np.median(spin_record, axis=0)
@@ -129,7 +154,6 @@ def experiment2(episode_size):
     plt.plot(means + stddevs, label="Mean + Std Dev")
     plt.plot(means - stddevs, label="Mean - Std Dev")
 
-    plt.title("fig. 4: Mean Values for 1000 episodes of Roulette")
     std_plot()
 
     plt.savefig("figure_4.png")
@@ -140,22 +164,10 @@ def experiment2(episode_size):
     plt.plot(medians + stddevs, label="Median + Std Dev")
     plt.plot(medians - stddevs, label="Median - Std Dev")
 
-    plt.title("fig. 5: Median Values for 1000 episodes of Roulette")
     std_plot()
 
     plt.savefig("figure_5.png")
     plt.close()
-
-    values, counts = np.unique(spin_record[:, -1], return_counts=True)
-    print(values, counts)
-    EV = EV_calc(values, counts)
-    print("EV", EV)
-    print_results("experiment 2 results", means, medians, stddevs)
-
-def EV_calc(values, counts):
-    total = np.sum(counts)
-    EV = np.sum(values * counts) / total
-    return EV
 
 def std_plot():
     plt.xlabel("Spin")
@@ -165,37 +177,46 @@ def std_plot():
     plt.xlim(0, 300)
     plt.ylim(-256, 100)
 
-def print_results(title, mean, median, std):
-    with open(title + ".txt", "w") as f:
-        f.write("Roulette Simulation Results\n")
-        f.write("===========================\n\n")
-
-        # f.write(f"Episodes: {winnings_arr.shape[0]}\n")
-        # f.write(f"Spins: {winnings_arr.shape[1]}\n")
-        # f.write("Starting bankroll: $256\n\n")
-
-        f.write("winnings by spin:\n")
-        f.write("Spin\tMean\tMedian\tStd Dev\n")
-
-        for spin in [0, 9, 49, 99, 249, 499, 999]:
-            f.write(
-                f"{spin + 1}\t"
-                f"{mean[spin]:.2f}\t"
-                f"{median[spin]:.2f}\t"
-                f"{std[spin]:.2f}\n"
-            )
-
-def spin_multiple_episodes(num_episodes, episode_size, bankroll_limit, has_bankroll_limit):
-    filled_arr = np.empty((num_episodes, episode_size))
+def spin_multiple_episodes(num_episodes, big_arr, episode_size, win_probability):
+    filled_arr = big_arr.copy()
     for i in range(num_episodes):
-        filled_arr[i] = episode_spin(episode_size, bankroll_limit, has_bankroll_limit)
+        filled_arr[i] = episode_spin(episode_size, win_probability)
     return filled_arr
 
-def episode_spin(episode_size, bankroll_limit, has_bankroll_limit):
-    win_probability = 0.4737  # set appropriately to the probability of a win
+def spin_multiple_episodes_with_bankroll(num_episodes, big_arr, episode_size, win_probability, bankroll_limit, has_bankroll_limit):
+    filled_arr = big_arr.copy()
+    for i in range(num_episodes):
+        filled_arr[i] = episode_spin_with_bankroll(episode_size, win_probability, bankroll_limit)
+    return filled_arr
+
+def episode_spin(episode_size, win_probability):
     winnings_arr = []
     episode_winnings = 0
     attempts = 0
+    while episode_winnings < 80 and attempts < episode_size:
+        won = False
+        bet_amount = 1
+        while not won:
+            won = get_spin_result(win_probability)
+            winnings_arr.append(episode_winnings)
+            if won:
+                episode_winnings = episode_winnings + bet_amount
+            else:
+                episode_winnings = episode_winnings - bet_amount
+                bet_amount = bet_amount * 2
+            attempts = attempts + 1
+    #fill remaining with highest value
+    while attempts < episode_size:
+        winnings_arr.append(episode_winnings)
+        attempts = attempts + 1
+    return winnings_arr
+
+
+def episode_spin_with_bankroll(episode_size, win_probability, bankroll_limit):
+    winnings_arr = []
+    episode_winnings = 0
+    attempts = 0
+    # bankroll_limit = -256
 
     # smaller bankroll doesn't make it
     # bankroll_limit = -25
@@ -205,7 +226,7 @@ def episode_spin(episode_size, bankroll_limit, has_bankroll_limit):
     while episode_winnings < 80 and attempts < episode_size:
         won = False
         bet_amount = 1
-        if episode_winnings <= bankroll_limit and has_bankroll_limit:
+        if episode_winnings <= bankroll_limit:
             # print("bust")
             break
         while not won:
@@ -217,7 +238,7 @@ def episode_spin(episode_size, bankroll_limit, has_bankroll_limit):
                 episode_winnings = episode_winnings - bet_amount
                 bet_amount = bet_amount * 2
             attempts = attempts + 1
-            if episode_winnings <= bankroll_limit and has_bankroll_limit:
+            if episode_winnings <= bankroll_limit:
                 # print("bust")
                 break
     #fill remaining with highest value
@@ -227,5 +248,5 @@ def episode_spin(episode_size, bankroll_limit, has_bankroll_limit):
     return winnings_arr
 
 
-if __name__ == "__main__":  		  	   		 		  		  		  		    	 		 		   		 		  
-    test_code()  		  	   		 		  		  		  		    	 		 		   		 		  
+if __name__ == "__main__":
+    test_code()
