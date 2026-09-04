@@ -187,8 +187,12 @@ def print_results(title, mean, median, std):
 
 def spin_multiple_episodes(num_episodes, episode_size, bankroll_limit, has_bankroll_limit):
     filled_arr = np.empty((num_episodes, episode_size))
-    for i in range(num_episodes):
-        filled_arr[i] = episode_spin(episode_size, bankroll_limit, has_bankroll_limit)
+    if (has_bankroll_limit):
+        for i in range(num_episodes):
+            filled_arr[i] = episode_spin_bankroll(episode_size, bankroll_limit, has_bankroll_limit)
+    else:        
+        for i in range(num_episodes):
+            filled_arr[i] = episode_spin(episode_size, bankroll_limit, has_bankroll_limit)
     return filled_arr
 
 def episode_spin(episode_size, bankroll_limit, has_bankroll_limit):
@@ -226,6 +230,41 @@ def episode_spin(episode_size, bankroll_limit, has_bankroll_limit):
         attempts = attempts + 1
     return winnings_arr
 
+
+def episode_spin_bankroll(episode_size, bankroll_limit, has_bankroll_limit):
+    win_probability = 0.4737  # set appropriately to the probability of a win
+    winnings_arr = []
+    episode_winnings = 0
+    attempts = 0
+
+    # smaller bankroll doesn't make it
+    # bankroll_limit = -25
+
+    # high limit looks like unlimited
+    # bankroll_limit = -999999999999999999999
+    while episode_winnings < 80 and attempts < episode_size:
+        won = False
+        bet_amount = 1
+        if episode_winnings <= bankroll_limit and has_bankroll_limit:
+            # print("bust")
+            break
+        while not won:
+            won = get_spin_result(win_probability)
+            winnings_arr.append(episode_winnings)
+            if won:
+                episode_winnings = episode_winnings + bet_amount
+            else:
+                episode_winnings = episode_winnings - bet_amount
+                bet_amount = bet_amount * 2
+            attempts = attempts + 1
+            if episode_winnings <= bankroll_limit and has_bankroll_limit:
+                # print("bust")
+                break
+    #fill remaining with highest value
+    while attempts < episode_size:
+        winnings_arr.append(episode_winnings)
+        attempts = attempts + 1
+    return winnings_arr
 
 if __name__ == "__main__":  		  	   		 		  		  		  		    	 		 		   		 		  
     test_code()  		  	   		 		  		  		  		    	 		 		   		 		  
