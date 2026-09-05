@@ -201,11 +201,6 @@ def episode_spin(episode_size, bankroll_limit, has_bankroll_limit):
     episode_winnings = 0
     attempts = 0
 
-    # smaller bankroll doesn't make it
-    # bankroll_limit = -25
-
-    # high limit looks like unlimited
-    # bankroll_limit = -999999999999999999999
     while episode_winnings < 80 and attempts < episode_size:
         won = False
         bet_amount = 1
@@ -222,8 +217,11 @@ def episode_spin(episode_size, bankroll_limit, has_bankroll_limit):
                 bet_amount = bet_amount * 2
             attempts = attempts + 1
             if episode_winnings <= bankroll_limit and has_bankroll_limit:
-                # print("bust")
+                # print("attempt", attempts, "bust")
                 break
+            if (bet_amount > 100):
+                # print("attempt", attempts, "episode_winnings", episode_winnings, "bet amount", bet_amount)
+                pass
     #fill remaining with highest value
     while attempts < episode_size:
         winnings_arr.append(episode_winnings)
@@ -237,28 +235,28 @@ def episode_spin_bankroll(episode_size, bankroll_limit, has_bankroll_limit):
     episode_winnings = 0
     attempts = 0
 
-    # smaller bankroll doesn't make it
-    # bankroll_limit = -25
-
-    # high limit looks like unlimited
-    # bankroll_limit = -999999999999999999999
     while episode_winnings < 80 and attempts < episode_size:
         won = False
         bet_amount = 1
         if episode_winnings <= bankroll_limit and has_bankroll_limit:
-            # print("bust")
+            # print("attempt", attempts, "top bust")
             break
-        while not won:
+        while not won and attempts < episode_size:
             won = get_spin_result(win_probability)
             winnings_arr.append(episode_winnings)
             if won:
                 episode_winnings = episode_winnings + bet_amount
             else:
                 episode_winnings = episode_winnings - bet_amount
-                bet_amount = bet_amount * 2
+                # std martingale, bet double 
+                if (episode_winnings + (bankroll_limit * -1)) > bet_amount * 2:
+                    bet_amount = bet_amount * 2
+                # broken martingale, bet what you got
+                else:
+                    bet_amount = episode_winnings + (bankroll_limit * -1)
             attempts = attempts + 1
             if episode_winnings <= bankroll_limit and has_bankroll_limit:
-                # print("bust")
+                # print("attempt", attempts, "episode_winnings", episode_winnings, "bust")
                 break
     #fill remaining with highest value
     while attempts < episode_size:
