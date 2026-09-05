@@ -38,7 +38,14 @@ def author():
     :rtype: str  		  	   		 		  		  		  		    	 		 		   		 		  
     """  		  	   		 		  		  		  		    	 		 		   		 		  
     return "hbeale7"    		  	   		 		  		  		  		    	 		 		   		 		  
-  		  	   		 		  		  		  		    	 		 		   		 		  
+
+def study_group():
+    """
+    Returns
+        A comma separated string of GT_Name of each member of your study group
+        # Example: "gburdell3, jdoe77, tbalch7" or "gburdell3" if a single individual working alone
+    """
+    return "hbeale7"
   		  	   		 		  		  		  		    	 		 		   		 		  
 def gtid():  		  	   		 		  		  		  		    	 		 		   		 		  
     """  		  	   		 		  		  		  		    	 		 		   		 		  
