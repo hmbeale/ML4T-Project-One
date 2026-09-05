@@ -114,7 +114,7 @@ def experiment1(episode_size):
     plt.savefig("figure_3.png")
     plt.close()
 
-    print_results("experiment 1 results", means, medians, stddevs)
+    # print_results("experiment 1 results", means, medians, stddevs)
 
 def experiment2(episode_size):
     num_episodes = 1000
@@ -146,11 +146,11 @@ def experiment2(episode_size):
     plt.savefig("figure_5.png")
     plt.close()
 
-    values, counts = np.unique(spin_record[:, -1], return_counts=True)
-    print(values, counts)
-    EV = EV_calc(values, counts)
-    print("EV", EV)
-    print_results("experiment 2 results", means, medians, stddevs)
+    # values, counts = np.unique(spin_record[:, -1], return_counts=True)
+    # print(values, counts)
+    # EV = EV_calc(values, counts)
+    # print("EV", EV)
+    # print_results("experiment 2 results", means, medians, stddevs)
 
 def EV_calc(values, counts):
     total = np.sum(counts)
